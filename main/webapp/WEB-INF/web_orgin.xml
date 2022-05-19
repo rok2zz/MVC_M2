@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	<!-- Web.xml은 톰켓 서비스가 시작될때 각종 설정을 읽어서 톰켓에 적용한다. 
+		수정하면 톰켓 서비스를 다시 시작해야 한다. 
+		주의 : 한 나라도 xml 문법에 맞지 않으면 톰켓 서비스가 자동되지 않는다. 
+		 -->
+  <display-name>MVC_M2</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>pjw.html</welcome-file>
+  </welcome-file-list>
+  
+</web-app>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	<!-- Web.xml은 톰켓 서비스가 시작될때 각종 설정을 읽어서 톰켓에 적용한다. 
+		수정하면 톰켓 서비스를 다시 시작해야 한다. 
+		주의 : 한 나라도 xml 문법에 맞지 않으면 톰켓 서비스가 자동되지 않는다.
+		web.xml 에서 설정을 잡으면 jsp 페이지 각각에서 셋팅하지 않아도 된다.  
+		 -->
+  <display-name>MVC_M2</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>pjw.html</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 오라클 데이타 베이스 접속 정보  -->
+  <context-param>
+  	<param-name>OracleDriver</param-name>
+  	<param-value>oracle.jdbc.OracleDriver</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>OracleURL</param-name>
+  	<param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
+  </context-param>
+  
+   <context-param>
+    <param-name>OracleId</param-name>
+  	<param-value>hr2</param-value>
+  </context-param>
+  
+   <context-param>
+    <param-name>OraclePwd</param-name>
+  	<param-value>1234</param-value>
+  </context-param>
+  
+  <!--  세션 유지 기간 설정 (20분동안 세션 유지  -->
+  <session-config>
+  	<session-timeout>20</session-timeout>
+  </session-config>
+  
+  <!-- 한글 깨짐 방지를 위한 설정 (이 프로젝트의 모든 페이지에 대해서 설정)  -->
+  <filter>
+  	<filter-name>SetCharEncoding</filter-name>
+  	<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+  		<init-param>
+  			<param-name>encoding</param-name>
+  			<param-value>utf-8</param-value>
+  		</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>SetCharEncoding</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- 서블릿 (servlet) : *.java  ==> html 로 출력 하는 자바를 서블릿 
+  		   : 요즘은 서블릿을 controller  
+  서블릿(Controller) 매핑 설정 :  -->
+  
+  <!-- 서블릿 Controller 매핑 설정  -->
+  <servlet>
+  	<servlet-name>myController</servlet-name>
+  	<servlet-class>com.controller.Mycontroller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>myController</servlet-name>
+  	<url-pattern>/mvc_test/my.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- MVCBoard 글목록 보기 Controller 매핑  -->
+  <servlet>
+  	<servlet-name>MVCBoardList</servlet-name>
+  	<servlet-class>model2.mvcboard.ListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardList</servlet-name>
+  	<url-pattern>/mvcboard/list.do</url-pattern>
+  </servlet-mapping>
+  
+    <!-- MVCBoard 글내용 보기 Controller 매핑  -->
+  <servlet>
+  	<servlet-name>MVCBoardView</servlet-name>
+  	<servlet-class>model2.mvcboard.ViewController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardView</servlet-name>
+  	<url-pattern>/mvcboard/view.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- MVCBoard 글 수정/삭제  Controller 매핑  -->
+  <servlet>
+  	<servlet-name>MVCBoardPass</servlet-name>
+  	<servlet-class>model2.mvcboard.PassController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardPass</servlet-name>
+  	<url-pattern>/mvcboard/pass.do</url-pattern>
+  </servlet-mapping>
+  
+  
+    
+  <!-- 페이징 처리를 위한 설정 (변수값 할당) 출력레코드수:10개, 페이지수 : 5 -->
+  <context-param>
+  	<param-name>POSTS_PER_PAGE</param-name>
+  	<param-value>10</param-value> 
+  </context-param>
+  
+  <context-param>
+  	<param-name>PAGES_PER_BLOCK</param-name>
+  	<param-value>5</param-value> 
+  </context-param>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</web-app>

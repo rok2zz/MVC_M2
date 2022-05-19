@@ -1,0 +1,59 @@
+
+
+Controller (서블릿) 매핑 설정 
+  1. web.xml 설정 
+  2. @ (어노테이션) 을 이용해서 설정하는 방법 
+  
+첨부 파일이 있는 게시판 (MVC 모델)  : 중.대규모 사이트 개발할때 , 협업으로 개발을 진행
+ 
+ 1. Database 의 테이블 생성. (더미 데이터 입력)
+ 2. DTO 객체 생성 (전달자 역활) : Application  ===>  DTO  ==> DAO ==> DataBase 
+ 				  			 DataBase ==> DAO  ==> DTO ==> Application 
+ 3. DAO 객체 생성 : DataBase에서 Select, Insert, Update, Delete  하는 객체 
+ 4. Controller 매핑 설정 ( 1. web.xml , 2. @ (어노테이션을 사용)
+ 5. Controller 객체 생성, 코드 ( 서블릿 ) , (doGet, doPost) 메소드 재정의
+ 		클라이언트 요청 ===> 모델 (비즈니스 로직 처리, DTO, DAO) ==>  View 페이지로 처리결과를 출력   
+ 6. View 페이지 생성 
+  
+ DBCP ( DataBase Connection Pool) : Connection 객체 생성시에 서버의 부하가 많이 걸린다.
+ 	-- 톰켓이 실행 될때 Connection 객체를 기본값은 20개 를 만들어 두고 필요할때 부여해줌. 
+ 	-- 중.대규모 사이트에서 서버의 부하를 감소하기 위해서 사용.
+ 	
+   :<<주의>>톰캣 서버를 이클립스에서 제거후 재등록 
+   
+  1. server.xml  설정 (톰켓 설치폴더 \conf)
+  	  <GlobalNamingResources>
+  	  	<<블락에서 처리함>>
+  	  	    <Resource auth="Container"
+              driverClassName="oracle.jdbc.OracleDriver"
+              type="javax.sql.DataSource" 
+              initialSize="0"
+              minIdle="5"
+              maxTotal="20"
+              maxIdle="20"
+              maxWaitMillis="5000"
+              url="jdbc:oracle:thin:@localhost:1521:xe"
+              name="dbcp_myoracle"
+              username="hr2"
+              password="1234" />
+  	  	
+  	  </GlobalNamingResources>
+  
+  2. content.xml 설정 
+  	
+  	<Context>
+  		<<블락에서 설정>>	
+  	<ResourceLink global="dbcp_myoracle" name="dbcp_myoracle" 
+                  type="javax.sql.DataSource"/>
+  		 		
+  	</Context>
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+ 	
